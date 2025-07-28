@@ -1,3 +1,6 @@
 # created by virtualenv automatically
 .venv/
 .idea/
+
+Data/raw/
+Reprot/
