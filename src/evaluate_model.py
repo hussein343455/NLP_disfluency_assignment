@@ -19,7 +19,7 @@ device = config.DEVICE
 # ============================================
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from src import config
+import config
 
 model = AutoModelForSeq2SeqLM.from_pretrained(config.EVAL_MODEL_NAME) #f"{config.OUTPUT_DIR}/{config.FINAL_MODEL_NAME}
 tokenizer = AutoTokenizer.from_pretrained(config.BASE_TOKENIZER_NAME_T5)
