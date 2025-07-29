@@ -1,6 +1,6 @@
 import torch
-from scr import config
-from scr.data_processing import load_dataset_from_raw, clean_dataset_dict, tokenize_dataset_for_t5
+import config
+from data_processing import load_dataset_from_raw, clean_dataset_dict, tokenize_dataset_for_t5
 import numpy as np
 
 # ============================================
