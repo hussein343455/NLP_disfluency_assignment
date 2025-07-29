@@ -2,7 +2,7 @@ import unittest
 import json
 from unittest.mock import patch, mock_open
 from datasets import Dataset, DatasetDict
-from scr.data_processing import reorder_json, load_dataset_from_raw, clean_dataset_dict
+from src.data_processing import reorder_json, load_dataset_from_raw, clean_dataset_dict
 
 class TestDatasetLoading(unittest.TestCase):
 

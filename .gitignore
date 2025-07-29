@@ -18,5 +18,5 @@ models/t5-disfluency-correction_v1/disfl-qa-t5-final_*/
 .pytest_cache/
 
 # unnecessary files
-scr/Push_to_the_hub.py
+src/Push_to_the_hub.py
 

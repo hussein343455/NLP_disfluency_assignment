@@ -1,8 +1,8 @@
 import unittest
 from datasets import Dataset, DatasetDict
 from transformers import AutoTokenizer
-from scr.data_processing import tokenize_dataset_for_t5
-from scr import config
+from src.data_processing import tokenize_dataset_for_t5
+from src import config
 
 class TestTokenization(unittest.TestCase):
     """
