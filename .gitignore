@@ -12,7 +12,8 @@ __pycache__/
 
 Data/raw/
 Reprot/
-models/
+models/t5-disfluency-correction_v1/checkpoint-*/
+models/t5-disfluency-correction_v1/disfl-qa-t5-final_*/
 
 
 .pytest_cache/
