@@ -10,7 +10,6 @@ __pycache__/
 # IDE files
 .idea/
 
-Data/raw/
 Reprot/
 models/t5-disfluency-correction_v1/checkpoint-*/
 models/t5-disfluency-correction_v1/disfl-qa-t5-final_*/
