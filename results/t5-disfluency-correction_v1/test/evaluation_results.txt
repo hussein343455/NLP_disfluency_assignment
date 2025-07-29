@@ -1,0 +1,16 @@
+--- Evaluation Results ---
+
+Metric: BLEU
+====================
+Score: 86.5325
+Precisions (1-4 grams): [94.1891, 89.2587, 85.8816, 82.9602]
+
+Metric: METEOR
+====================
+Score: 0.9394
+
+Metric: BERTScore
+====================
+Precision: 0.9648
+Recall:    0.9607
+F1 Score:  0.9624

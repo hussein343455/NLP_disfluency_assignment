@@ -1,0 +1,9 @@
+--- ✅ Evaluation Complete ---
+bleu Score: 41.3469
+Precisions (1-4 grams): [53.4705, 44.8733, 38.0149, 32.0417]
+--------------------------------
+
+METEOR Score: 0.7879
+BERTScore Precision: 0.6795
+BERTScore Recall:    0.8410
+BERTScore F1:        0.7498

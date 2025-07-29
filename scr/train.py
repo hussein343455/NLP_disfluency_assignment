@@ -1,10 +1,13 @@
 import torch
-from transformers import T5ForConditionalGeneration, Trainer, TrainingArguments
-import config
-from data_processing import load_dataset_from_raw, clean_dataset_dict, tokenize_dataset_for_t5
+from transformers import T5ForConditionalGeneration
+from scr import config
+from scr.data_processing import load_dataset_from_raw, clean_dataset_dict, tokenize_dataset_for_t5
 from transformers import AutoTokenizer, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
 
-# 1. Load Datasets
+# ============================================
+# Load and clean Data
+# ============================================
+
 print("Loading datasets...")
 full_dataset = load_dataset_from_raw(config.FILE_PATHS)
 full_dataset_cleaned = clean_dataset_dict(full_dataset)
@@ -12,30 +15,40 @@ print("datasets loaded successfully")
 device = config.DEVICE
 print(device)
 #%%
+# ============================================
+# Load the original model and tokenizer
+# ============================================
 
-# 2. Load Model
 print("Loading model...")
-model = T5ForConditionalGeneration.from_pretrained(config.MODEL_CHECKPOINT_T5)
+model = T5ForConditionalGeneration.from_pretrained(config.BASE_MODEL_CHECKPOINT_T5)
 print("model loaded successfully")
 model.to(device)
-
 print("Loading tokenizer...")
-tokenizer = AutoTokenizer.from_pretrained(config.TOKENIZER_NAME_T5)
+tokenizer = AutoTokenizer.from_pretrained(config.BASE_TOKENIZER_NAME_T5)
 print("tokenizer loaded successfully")
 
 #%%
+# ============================================
+# tokenizer the data
+# ============================================
+
 tokenized_training_data = tokenize_dataset_for_t5(tokenizer,
                                                   dataset_dict = full_dataset_cleaned,
                                                   prefix=config.PREFIX,
                                                   max_source_length=config.MAX_SOURCE_LENGTH,
                                                   max_target_length=config.MAX_TARGET_LENGTH)
 #%%
-
-from transformers import DataCollatorForSeq2Seq
+# ============================================
+# Data Collator
+# ============================================
 
 data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
 
 #%%
+# ============================================
+# Load evaluation metric and compute_metrics to be used during training
+# ============================================
+
 import evaluate
 import numpy as np
 
@@ -83,9 +96,10 @@ def compute_metrics(eval_preds):
     result = {k: round(v, 4) for k, v in result.items()}
     return result
 #%%
+# ============================================
+# Training the model
+# ============================================
 
-# Define Training Arguments
-# These arguments control the fine-tuning process.
 training_args = Seq2SeqTrainingArguments(
     output_dir=config.OUTPUT_DIR,
     eval_strategy="epoch",
@@ -95,7 +109,6 @@ training_args = Seq2SeqTrainingArguments(
     weight_decay=config.WEIGHT_DECAY,
     save_total_limit=3,
     num_train_epochs=config.NUM_TRAIN_EPOCHS,
-    # load_best_model_at_end=True,
     predict_with_generate=True,
     logging_dir=f"{config.OUTPUT_DIR}/logs",
     logging_steps=40,
@@ -114,5 +127,11 @@ trainer = Seq2SeqTrainer(
 )
 
 trainer.train()
+#%%
+# ============================================
+# save the model
+# ============================================
+
+trainer.save_model(f"{config.OUTPUT_DIR}/{config.FINAL_MODEL_NAME}")
 
 

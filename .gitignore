@@ -12,9 +12,11 @@ __pycache__/
 
 Data/raw/
 Reprot/
-scr/models/
-scr/models0/
+models/
 
 
 .pytest_cache/
+
+# unnecessary files
+scr/Push_to_the_hub.py
 

@@ -14,7 +14,7 @@ class TestTokenization(unittest.TestCase):
         Set up a mock dataset and tokenizer for testing.
         This method is called before each test function.
         """
-        self.tokenizer = AutoTokenizer.from_pretrained(config.TOKENIZER_NAME_T5)
+        self.tokenizer = AutoTokenizer.from_pretrained(config.BASE_TOKENIZER_NAME_T5)
         self.prefix = config.PREFIX
         self.max_source_length = config.MAX_SOURCE_LENGTH
         self.max_target_length = config.MAX_TARGET_LENGTH
