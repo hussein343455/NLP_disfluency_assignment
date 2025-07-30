@@ -2,6 +2,10 @@ import torch
 import config
 from data_processing import load_dataset_from_raw, clean_dataset_dict, tokenize_dataset_for_t5
 import numpy as np
+from transformers import set_seed
+
+# Set the seed for reproducibility
+set_seed(config.SEED)
 
 # ============================================
 # Load and clean Data

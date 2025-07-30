@@ -2,7 +2,10 @@ import torch
 from transformers import T5ForConditionalGeneration
 import config
 from data_processing import load_dataset_from_raw, clean_dataset_dict, tokenize_dataset_for_t5
-from transformers import AutoTokenizer, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
+from transformers import AutoTokenizer, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer, set_seed
+
+# Set the seed for reproducibility
+set_seed(config.SEED)
 
 # ============================================
 # Load and clean Data
@@ -113,6 +116,7 @@ training_args = Seq2SeqTrainingArguments(
     logging_dir=f"{config.OUTPUT_DIR}/logs",
     logging_steps=40,
     fp16=True,
+    seed=config.SEED,
 )
 
 # Initialize Trainer
